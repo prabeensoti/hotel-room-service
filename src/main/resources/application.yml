@@ -1,0 +1,35 @@
+server:
+  error:
+    include-message: always
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+#      auto-index-creation: true
+      authentication-database: admin
+      username: root
+      password: rootpassword
+      database: room-service
+      port: 27017
+      host: localhost
+      uuid-representation: java_legacy
+  cache:
+    redis:
+      time-to-live: 4000
+  zipkin:
+    base-url: http://localhost:9411/
+    discovery-client-enabled: true
+    enabled: true
+  sleuth.sampler.probability: 1.0
+  application:
+    name: hotel-room-service
+
+resilience4j:
+  retry:
+    instances:
+      hotel-service:
+        maxRetryAttempts: 3
+        wait-duration: 10000
+
+
